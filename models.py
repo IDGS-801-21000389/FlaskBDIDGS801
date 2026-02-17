@@ -4,11 +4,11 @@ import datetime
 
 db = SQLAlchemy()
 
-class Alumnos(db.model):
+class Alumnos(db.Model):
     __tablename__ = 'alumnos'
-    id=db.column(db.integer, primary_key=True)
-    nombre = db.column(db.String(50))
-    apaterno = db.column(db.String(50))
-    email = db.column(db.String(50))
+    id=db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(50))
+    apaterno = db.Column(db.String(50))
+    email = db.Column(db.String(50))
     created_date = db.Column(db.DateTime, default = datetime.datetime.now)
 
