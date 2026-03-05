@@ -3,8 +3,11 @@
 {% block container %}
 <div class="py-32 relative overflow-x-auto sm:rounded-lg">
 
+
+<center><h1>MAESTROS</h1></center>
+
 <!-- BOTÓN AGREGAR -->
-<a href="/alumnos"
+<a href="maestros/agregar"
    class="inline-flex items-center gap-2
           bg-blue-600 hover:bg-blue-700
           text-white text-sm font-semibold
@@ -32,10 +35,11 @@
 
 <thead class="bg-neutral-secondary-soft border-b border-default">
 <tr>
+    <th class="px-6 py-3 font-medium">Matricula</th>
     <th class="px-6 py-3 font-medium">Nombre</th>
-    <th class="px-6 py-3 font-medium">Apellido Paterno</th>
+    <th class="px-6 py-3 font-medium">Apellidos</th>
+    <th class="px-6 py-3 font-medium">Especialidad</th>
     <th class="px-6 py-3 font-medium">Email</th>
-    <th class="px-6 py-3 font-medium">Telefono</th>
     <th class="px-6 py-3 font-medium">Detalle</th>
     <th class="px-6 py-3 font-medium">Editar</th>
     <th class="px-6 py-3 font-medium">Eliminar</th>
@@ -43,17 +47,18 @@
 </thead>
 
 <tbody>
-{% for alum in alumno %}
+{% for maes in maestros %}
 <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default">
 
-<td class="px-6 py-4">{{alum.nombre}}</td>
-<td class="px-6 py-4">{{alum.apellidos}}</td>
-<td class="px-6 py-4">{{alum.email}}</td>
-<td class="px-6 py-4">{{alum.telefono}}</td>
+<td class="px-6 py-4">{{maes.matricula}}</td>    
+<td class="px-6 py-4">{{maes.nombre}}</td>
+<td class="px-6 py-4">{{maes.apellidos}}</td>
+<td class="px-6 py-4">{{maes.especialidad}}</td>
+<td class="px-6 py-4">{{maes.email}}</td>
 
 <!-- VER -->
 <td class="px-6 py-4">
-<a href="detalles?id={{ alum.id }}"
+<a href="maestros/detalles?matricula={{ maes.matricula }}"
    class="inline-flex items-center gap-1
           bg-green-100 hover:bg-green-200
           text-green-700
@@ -80,7 +85,7 @@
 
 <!-- EDITAR -->
 <td class="px-6 py-4">
-<a href="editar?id={{alum.id}}"
+<a href="maestros/editar?matricula={{maes.matricula}}"
    class="inline-flex items-center gap-1
           bg-yellow-100 hover:bg-yellow-200
           text-yellow-700
@@ -105,7 +110,7 @@
 
 <!-- ELIMINAR -->
 <td class="px-6 py-4">
-<a href="eliminar?id={{alum.id}}"
+<a href="maestros/eliminar?matricula={{maes.matricula}}"
    class="inline-flex items-center gap-1
           bg-red-100 hover:bg-red-200
           text-red-700
