@@ -26,19 +26,32 @@ def registrar():
 	return render_template("alumnos/alumnos.html", 
 	form = create_form, alumno = alumnos)
 
-@alumnos.route('/detalles', methods = ['GET', 'POST'])
+@alumnos.route('/detalles', methods=['GET','POST'])
 def detalles():
-	create_form = forms.UserForm2(request.form)
-	if request.method == 'GET':
-		id = request.args.get('id')
-		alum1 = db.session.query(Alumnos).filter(Alumnos.id == id).first()
-		id = request.args.get('id')
-		nombre = alum1.nombre
-		apellidos = alum1.apellidos
-		email = alum1.email
-		telefono = alum1.telefono
-	return render_template('alumnos/detalles.html', id = id, nombre = nombre, apellidos = apellidos, email = email, telefono = telefono)
+    create_form = forms.UserForm2(request.form)
 
+    if request.method == 'GET':
+        id = request.args.get('id')
+
+        alum1 = db.session.query(Alumnos).filter(Alumnos.id == id).first()
+
+        nombre = alum1.nombre
+        apellidos = alum1.apellidos
+        email = alum1.email
+        telefono = alum1.telefono
+
+        # cursos del alumno
+        cursos = alum1.cursos
+
+    return render_template(
+        'alumnos/detalles.html',
+        id=id,
+        nombre=nombre,
+        apellidos=apellidos,
+        email=email,
+        telefono=telefono,
+        cursos=cursos
+    )
 @alumnos.route("/editar", methods=['GET', 'POST'])
 def editar():
     create_form = forms.UserForm2(request.form)

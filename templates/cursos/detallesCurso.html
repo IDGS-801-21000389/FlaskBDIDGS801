@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+{% block container %}
+
+<div class="py-32 relative overflow-x-auto sm:rounded-lg">
+
+<!-- =========================
+INSCRIBIR ALUMNO
+========================= -->
+<form action="/cursos/inscribir" method="POST" class="max-w-md mb-10">
+
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<input type="hidden" name="curso_id" value="{{curso.id}}">
+
+<label class="block mb-2 text-sm font-medium text-gray-900">
+Seleccionar Alumno
+</label>
+
+<select name="alumno_id"
+class="block w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg">
+
+{% for alumno in alumnos %}
+<option value="{{alumno.id}}">
+{{alumno.nombre}} {{alumno.apellidos}}
+</option>
+{% endfor %}
+
+</select>
+
+<div class="grid md:grid-cols-2 md:gap-6 mt-4">
+
+<button type="submit"
+class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">
+Inscribir Alumno
+</button>
+
+<a href="/listaCurso"
+class="bg-red-500 text-white px-4 py-2 rounded flex items-center justify-center gap-2 hover:bg-red-600">
+
+<svg class="w-5 h-5" fill="none" stroke="" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+d="M5 13l4 4L19 7"></path>
+</svg>
+
+Cancelar
+
+</a>
+
+</div>
+
+</form>
+
+
+<!-- =========================
+DATOS DEL CURSO
+========================= -->
+
+<div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100">
+
+<img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+src="{{ url_for('static', filename='img/curso.jpg') }}">
+
+<div class="flex flex-col justify-between p-4 leading-normal">
+
+<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+Curso: {{curso.nombre}}
+</h5>
+
+<p class="mb-3 font-normal text-gray-700">
+Descripción: {{curso.descripcion}}
+</p>
+
+<p class="mb-3 font-normal text-gray-700">
+Maestro: {{curso.maestro.nombre}} {{curso.maestro.apellidos}}
+</p>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+ALUMNOS INSCRITOS
+========================= -->
+
+<h2 class="mt-10 mb-4 text-xl font-bold">
+Alumnos inscritos
+</h2>
+
+<div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+
+<table class="w-full text-sm text-left text-body">
+
+<thead class="bg-neutral-secondary-soft border-b border-default">
+
+<tr>
+<th class="px-6 py-3">ID</th>
+<th class="px-6 py-3">Nombre</th>
+<th class="px-6 py-3">Email</th>
+<th class="px-6 py-3">Acción</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for alumno in curso.alumnos %}
+
+<tr class="border-b">
+
+<td class="px-6 py-4">
+{{alumno.id}}
+</td>
+
+<td class="px-6 py-4">
+{{alumno.nombre}} {{alumno.apellidos}}
+</td>
+
+<td class="px-6 py-4">
+{{alumno.email}}
+</td>
+
+<td class="px-6 py-4">
+
+<a href="/cursos/quitarAlumno?curso={{curso.id}}&alumno={{alumno.id}}"
+class="inline-flex items-center gap-1
+bg-red-100 hover:bg-red-200
+text-red-700
+text-xs font-semibold
+px-2 py-1
+rounded-lg
+transition">
+
+Quitar
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+{% endblock %}

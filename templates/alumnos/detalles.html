@@ -1,13 +1,66 @@
 {% extends "layout.html" %}
 {% block container %}
 
-<a href="/" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="{{ url_for('static', filename='img/user.jpg') }}" alt="">
-    <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Nombre: {{nombre}} {{apellidos}}</h5>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ email }}</p>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ telefono }}</p>
+<div class="max-w-4xl mx-auto mt-8 space-y-6">
+
+    <!-- Tarjeta del alumno -->
+    <div class="bg-white shadow-md rounded-xl p-6 flex items-center gap-6 border">
+
+        <img 
+        class="w-32 h-32 object-cover rounded-full border"
+        src="{{ url_for('static', filename='img/user.jpg') }}" 
+        alt="Alumno">
+
+        <div>
+            <h2 class="text-3xl font-bold text-gray-800">
+                {{nombre}} {{apellidos}}
+            </h2>
+
+            <p class="text-gray-600 mt-2">
+                📧 {{email}}
+            </p>
+
+            <p class="text-gray-600">
+                📱 {{telefono}}
+            </p>
+        </div>
+
     </div>
-</a>
+
+
+    <!-- Cursos -->
+    <div class="bg-white shadow-md rounded-xl p-6 border">
+
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+            Cursos inscritos
+        </h3>
+
+        {% if cursos %}
+
+        <div class="grid md:grid-cols-2 gap-4">
+
+            {% for curso in cursos %}
+            <div class="p-4 border rounded-lg hover:shadow-lg transition bg-gray-50">
+
+                <h4 class="text-xl font-semibold text-gray-800">
+                    📚 {{ curso.nombre }}
+                </h4>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <p class="text-gray-500">
+            Este alumno no está inscrito en ningún curso.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
 
 {% endblock %}

@@ -1,0 +1,142 @@
+{% extends "layout.html" %}
+
+{% block container %}
+<div class="py-32 relative overflow-x-auto sm:rounded-lg">
+
+
+<center><h1>CURSOS</h1></center>
+
+<!-- BOTÓN AGREGAR -->
+<a href="cursos/agregarCurso"
+   class="inline-flex items-center gap-2
+          bg-blue-600 hover:bg-blue-700
+          text-white text-sm font-semibold
+          px-4 py-2
+          rounded-xl
+          shadow-md hover:shadow-lg
+          transition-all duration-200
+          focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+
+    <!-- Icono + -->
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         class="w-5 h-5" 
+         fill="none" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 4v16m8-8H4"/>
+    </svg>
+
+    Agregar
+</a>
+
+<div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+<table class="w-full text-sm text-left rtl:text-right text-body">
+
+<thead class="bg-neutral-secondary-soft border-b border-default">
+<tr>
+    <th class="px-6 py-3 font-medium">Clave del Curso</th>
+    <th class="px-6 py-3 font-medium">Nombre</th>
+    <th class="px-6 py-3 font-medium">Descripcion</th>
+    <th class="px-6 py-3 font-medium">Maestro</th>
+    <th class="px-6 py-3 font-medium">Detalle</th>
+    <th class="px-6 py-3 font-medium">Editar</th>
+    <th class="px-6 py-3 font-medium">Eliminar</th>
+</tr>
+</thead>
+
+<tbody>
+{% for cur in cursos %}
+<tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default">
+
+<td class="px-6 py-4">{{cur.id}}</td>    
+<td class="px-6 py-4">{{cur.nombre}}</td>
+<td class="px-6 py-4">{{cur.descripcion}}</td>
+<td class="px-6 py-4">{{cur.maestro.nombre}}</td>
+
+<!-- VER -->
+<td class="px-6 py-4">
+<a href="cursos/detallesCurso?id={{ cur.id }}"
+   class="inline-flex items-center gap-1
+          bg-green-100 hover:bg-green-200
+          text-green-700
+          text-xs font-semibold
+          px-2 py-1
+          rounded-lg
+          transition">
+
+    <!-- Ojo -->
+    <svg xmlns="http://www.w3.org/2000/svg"
+         class="w-4 h-4"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+    </svg>
+
+    Ver
+</a>
+</td>
+
+<!-- EDITAR -->
+<td class="px-6 py-4">
+<a href="cursos/editarCurso?id={{ cur.id }}"
+   class="inline-flex items-center gap-1
+          bg-yellow-100 hover:bg-yellow-200
+          text-yellow-700
+          text-xs font-semibold
+          px-2 py-1
+          rounded-lg
+          transition">
+
+    <!-- Lápiz -->
+    <svg xmlns="http://www.w3.org/2000/svg"
+         class="w-4 h-4"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11 5h2M12 7v10m9-2l-6 6H5v-4l6-6m4-4l2 2"/>
+    </svg>
+
+    Editar
+</a>
+</td>
+
+<!-- ELIMINAR -->
+<td class="px-6 py-4">
+<a href="cursos/eliminarCurso?id={{cur.id}}"
+   class="inline-flex items-center gap-1
+          bg-red-100 hover:bg-red-200
+          text-red-700
+          text-xs font-semibold
+          px-2 py-1
+          rounded-lg
+          transition">
+
+    <!-- Basura -->
+    <svg xmlns="http://www.w3.org/2000/svg"
+         class="w-4 h-4"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4h6v3"/>
+    </svg>
+
+    Eliminar
+</a>
+</td>
+
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block container %}
+
+{% import "_macros.html" as macros %}
+
+<div class="py-32 relative overflow-x-auto sm:rounded-lg">
+
+<form action="/cursos/editarCurso" method="POST" novalidate class="max-w-md mx-auto">
+
+{{ form.csrf_token }} <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+{{ macros.campoNuevo(form.id, type="hidden") }}
+
+<div class="relative z-0 w-full mb-5 group">
+{{ macros.campoNuevo(form.nombre, class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer") }}
+</div>
+
+<div class="relative z-0 w-full mb-5 group">
+{{ macros.campoNuevo(form.descripcion, class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer") }}
+</div>
+
+<div class="relative z-0 w-full mb-5 group">
+
+<label class="block mb-2 text-sm font-medium text-gray-900">Maestro</label>
+
+<select name="maestro_id" class="block py-2.5 px-3 w-full text-sm border-b-2 border-gray-300 focus:border-blue-600 focus:outline-none">
+
+{% for value,label in form.maestro_id.choices %}
+
+<option value="{{value}}" {% if form.maestro_id.data == value %}selected{% endif %}>
+{{label}}
+</option>
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="grid md:grid-cols-2 md:gap-6">
+
+<input
+type="submit"
+value="Actualizar"
+class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5"
+/>
+
+<a href="/listadoCursos" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 text-center">
+Cancelar
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+{% endblock %}
